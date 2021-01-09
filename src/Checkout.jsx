@@ -49,6 +49,7 @@ export default function Checkout({ cart }) {
                         <option value="">Select Country</option>
                         <option value="China">China</option>
                         <option value="India">India</option>
+                        <option value="Tunisia">Tunisia</option>
                         <option value="United Kingdom">United Kingdom</option>
                         <option value="USA">USA</option>
                     </select>
