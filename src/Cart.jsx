@@ -2,7 +2,7 @@ import React from "react";
 import Spinner from "./Spinner";
 import useFetchAll from "./services/useFetchAll";
 
-export default function Cart({cart,quantity}) {
+export default function Cart({cart, updateQuantity}) {
     const urls = cart.map((i) => `products/${i.id}`);
     const { data: products, loading, error } = useFetchAll(urls);
 
