@@ -5,9 +5,16 @@ const emptyAddress = {
     city: "",
     country: "",
 };
+const STATUS = {
+    IDLE: "IDLE",
+    SUBMITTED: "SUBMITTED",
+    SUBMITTING:"SUBMITTING",
+    COMPLETED: "COMPLETED"
+};
 
 export default function Checkout({ cart }) {
     const [address, setAddress] = useState(emptyAddress);
+    const [status,setStatus] = useState(STATUS.IDLE);
 
     function handleChange(e) {
         e.persist();
@@ -24,7 +31,8 @@ export default function Checkout({ cart }) {
     }
 
     async function handleSubmit(event) {
-        // TODO
+        event.preventDefault();
+        setStatus(STATUS.SUBMITTING);
     }
 
     return (
@@ -66,6 +74,7 @@ export default function Checkout({ cart }) {
                         type="submit"
                         className="btn btn-primary"
                         value="Save Shipping Info"
+                        disabled={status === STATUS.SUBMITTING}
                     />
                 </div>
             </form>
