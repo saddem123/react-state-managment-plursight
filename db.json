@@ -69,6 +69,41 @@
       "city": "Kairouan",
       "country": "Tunisia",
       "id": 2
+    },
+    {
+      "city": "Kairouan",
+      "country": "Tunisia",
+      "id": 3
+    },
+    {
+      "city": "Kairouan",
+      "country": "Tunisia",
+      "id": 4
+    },
+    {
+      "city": "eeedd",
+      "country": "China",
+      "id": 5
+    },
+    {
+      "city": "saddem",
+      "country": "Tunisia",
+      "id": 6
+    },
+    {
+      "city": "Kairouan",
+      "country": "Tunisia",
+      "id": 7
+    },
+    {
+      "city": "TIn",
+      "country": "India",
+      "id": 8
+    },
+    {
+      "city": "Kairouna",
+      "country": "Tunisia",
+      "id": 9
     }
   ]
 }

@@ -4,18 +4,18 @@ import useFetch from "./services/useFetch";
 import Spinner from "./Spinner";
 import PageNotFound from "./PageNotFound";
 
-export default function Detail(props){
-    const { id } = useParams();
+export default function Detail(props) {
+    const {id} = useParams();
     const navigate = useNavigate();
-    const { data: product, loading, error } = useFetch(`products/${id}`);
+    const {data: product, loading, error} = useFetch(`products/${id}`);
 
 
     const [sku, setSku] = useState('');
 
-    if(!product) return <PageNotFound/>
-    if(error) throw error;
+    if (!product) return <PageNotFound/>
+    if (error) throw error;
 
-    if (loading) return <Spinner />;
+    if (loading) return <Spinner/>;
 
     return (
         <div id="detail">
@@ -24,7 +24,9 @@ export default function Detail(props){
             <p id="price">${product.price}</p>
             <select id="size"
                     value={sku}
-                    onChange={(e) => {setSku(e.target.value)}}>
+                    onChange={(e) => {
+                        setSku(e.target.value)
+                    }}>
                 <option value="">What Size?</option>
                 {
                     product.skus.map((s) => (
@@ -37,8 +39,12 @@ export default function Detail(props){
                     disabled={!sku}
                     className="btn btn-primary"
                     onClick={() => {
-                        props.addToCart(id,sku);
-                        navigate('/cart')
+                        props.dispatch({
+                            type: "add",
+                            id,
+                            sku
+                        });
+                        navigate('/cart');
                     }}>
                     Add to cart
                 </button>

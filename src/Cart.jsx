@@ -1,9 +1,9 @@
 import React from "react";
-import Spinner from "./Spinner";
 import useFetchAll from "./services/useFetchAll";
-import {useNavigate} from "react-router-dom";
+import Spinner from "./Spinner";
+import { useNavigate } from "react-router-dom";
 
-export default function Cart({cart, updateQuantity}) {
+export default function Cart({ cart, dispatch }) {
     const navigate = useNavigate();
     const urls = cart.map((i) => `products/${i.id}`);
     const { data: products, loading, error } = useFetchAll(urls);
@@ -25,7 +25,13 @@ export default function Cart({cart, updateQuantity}) {
                     <p>
                         <select
                             aria-label={`Select quantity for ${name} size ${size}`}
-                            onChange={(e) => updateQuantity(sku, parseInt(e.target.value))}
+                            onChange={(e) =>
+                                dispatch({
+                                    type: "update",
+                                    sku,
+                                    quantity: parseInt(e.target.value),
+                                })
+                            }
                             value={quantity}
                         >
                             <option value="0">Remove</option>
@@ -54,14 +60,14 @@ export default function Cart({cart, updateQuantity}) {
                     : `${numItemsInCart} Item${numItemsInCart > 1 ? "s" : ""} in My Cart`}
             </h1>
             <ul>{cart.map(renderItem)}</ul>
-            {cart.length > 0 && <button
-                className="btn btn-primary"
-                onClick={() => {
-                    navigate("/checkout");
-                }}>
-                Checkout
-            </button>}
+            {cart.length > 0 && (
+                <button
+                    className="btn btn-primary"
+                    onClick={() => navigate("/checkout")}
+                >
+                    Checkout
+                </button>
+            )}
         </section>
-
     );
 }

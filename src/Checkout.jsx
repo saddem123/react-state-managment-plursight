@@ -13,7 +13,7 @@ const STATUS = {
     COMPLETED: "COMPLETED"
 };
 
-export default function Checkout({ cart , emptyCart}) {
+export default function Checkout({ cart , dispatch}) {
     const [address, setAddress] = useState(emptyAddress);
     const [status,setStatus] = useState(STATUS.IDLE);
     const [saveError,setSaveError] = useState(null);
@@ -35,11 +35,9 @@ export default function Checkout({ cart , emptyCart}) {
     }
 
     function handleBlur(e) {
+        e.persist();
         setTouched((cur) => {
-            return {
-                ...cur,
-                [e.target.id]: true
-            }
+            return {...cur, [e.target.id]: true};
         });
     }
 
@@ -49,7 +47,7 @@ export default function Checkout({ cart , emptyCart}) {
         if(isValid) {
             try {
                 await saveShippingAddress(address);
-                emptyCart();
+                dispatch({type:"empty"});
                 setStatus(STATUS.COMPLETED);
             } catch (e) {
                 setSaveError(e);
@@ -67,7 +65,9 @@ export default function Checkout({ cart , emptyCart}) {
     }
 
     if(saveError) throw saveError;
-    if(status === STATUS.COMPLETED) return <h1>Thanks for shoping</h1>;
+    if(status === STATUS.COMPLETED) {
+        return <h1>Thanks for shopping</h1>;
+    }
     return (
         <>
             <h1>Shipping Info</h1>
